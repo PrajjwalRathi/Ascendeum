@@ -1,0 +1,31 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import time
+
+driver = webdriver.Chrome()
+
+times = []
+
+for i in range(10):
+
+    start_time = time.time()
+
+    driver.get("https://mathup.com/games/crossbit?mode=daily_challenge")
+
+    driver.implicitly_wait(5)
+
+    button = driver.find_element(By.XPATH, "/html/body/div/div[1]/div/div[1]/div/div/div[3]/div[1]/div[2]/div/div[2]/div[1]" )
+
+    if button.is_displayed():
+        end_time = time.time()
+        times.append((end_time - start_time))
+
+sum = 0
+
+for i in range(10):
+    sum += times[i]
+
+print(f' Avg time taken is {sum//10} sec')
+
+
+driver.quit()
